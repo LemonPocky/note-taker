@@ -3,8 +3,8 @@ const express = require('express');
 
 // Files for loading routes
 // There's probably a better way to do this
-const loadNotesApi = require('./apiroutes/notes.js');
-const loadNotesHtml = require('./htmlroutes/notes.js');
+const loadNotesApi = require('./apiroutes/notes_api.js');
+const loadNotesHtml = require('./htmlroutes/notes_html.js');
 const loadHomeHtml = require('./htmlroutes/home.js');
 
 function init() {
@@ -15,6 +15,8 @@ function init() {
   // Sets up the Express app to handle data parsing
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
+  // Let Express serve static files in 'public'
+  app.use(express.static('public'));
 
   // Set up routes
   loadHtmlRoutes(app);

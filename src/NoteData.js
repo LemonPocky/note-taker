@@ -9,12 +9,12 @@ const ID_LENGTH = 10;
 
 class NoteData {
   constructor() {
-    const notes = [];
+    this.notes = [];
   }
 
-  async loadAll() {
-    const data = await fs.readFile(path.join(__dirname, '../db/db.json'), 'utf8')
-    this.notes = JSON.stringify(data);
+  async loadNotesFromFile() {
+    const data = await fs.readFile(path.join(__dirname, '../db/db.json'), 'utf8');
+    this.notes = JSON.parse(data);
   }
   
   getNotes() {
