@@ -16,6 +16,13 @@ class NoteData {
     const data = await fs.readFile(path.join(__dirname, '../db/db.json'), 'utf8');
     this.notes = JSON.parse(data);
   }
+
+  async saveNotesToFile() {
+    return await fs.writeFile(
+      path.join(__dirname, "../db/db.json"),
+      JSON.stringify(this.notes)
+    );
+  }
   
   getNotes() {
     return this.notes;
@@ -26,7 +33,7 @@ class NoteData {
       note.id = nanoid(ID_LENGTH);
     }
     this.notes.push(note);
-    await fs.writeFile(path.join(__dirname, '../db/db.json'), JSON.stringify(this.notes));
+    return await this.saveNotesToFile();
   }
 }
 

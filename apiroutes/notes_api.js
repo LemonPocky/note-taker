@@ -16,8 +16,13 @@ function loadNotesApi(app) {
   app.post("/api/notes", (req, res) => {
     // Parse the request to get a JSON object
     const note = req.body;
-    noteData.save(note);
-    res.end();
+    noteData.save(note)
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        res.end();
+      })
   })
 }
 
